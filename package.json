@@ -1,0 +1,32 @@
+{
+  "name": "housingdb_api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "gulp test",
+    "hold": "tail -f /dev/null"
+  },
+  "author": "Zac Littleberry",
+  "license": "ISC",
+  "dependencies": {
+    "hapi": "^17.5.1",
+    "hapi-swagger": "^9.1.1",
+    "inert": "^5.1.0",
+    "joi": "^13.4.0",
+    "joi-to-json-schema": "^3.3.0",
+    "pg": "^7.4.3",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^4.37.10",
+    "sequelize-cli": "^4.0.0",
+    "vision": "^5.3.3"
+  },
+  "devDependencies": {
+    "code": "^5.2.0",
+    "gulp": "^3.9.1",
+    "gulp-lab": "^1.0.7",
+    "lab": "^15.5.0"
+  }
+}
