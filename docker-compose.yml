@@ -1,0 +1,30 @@
+version: '3'
+services:
+  postgres:
+    image: postgres:10
+    restart: always
+    volumes:
+      - ./docker/postgres-data:/var/lib/postgresql/data
+    env_file:
+      - variables.env
+    ports:
+      - "15432:5432"
+  housingdb_api:
+    build: .
+    hostname: housing
+    # command: ["./wait-for-it/wait-for-it.sh", "postgres:5432", "-t", "300", "--", "npm", "run", "start"]
+    # command: ["./wait-for-it/wait-for-it.sh", "postgres:5432", "-t", "300", "--", "npm", "run", "dev"]
+    command: ["./wait-for-it/wait-for-it.sh", "postgres:5432", "-t", "300", "--", "npm", "run", "test"]
+    # command: ["./wait-for-it/wait-for-it.sh", "postgres:5432", "-t", "300", "--", "npm", "run", "hold"]
+    volumes:
+      - ./:/usr/src/api
+      - /usr/src/api/node_modules
+    ports:
+      - "23085:8081"
+    env_file:
+      - variables.env
+    links:
+      - postgres
+networks:
+  default:
+    driver: bridge
