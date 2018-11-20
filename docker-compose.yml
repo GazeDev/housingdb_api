@@ -6,11 +6,13 @@ services:
     volumes:
       - ./docker/postgres-data:/var/lib/postgresql/data
     env_file:
-      - variables.env
+      - docker/variables.env
     ports:
       - "15432:5432"
   housingdb_api:
-    build: .
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
     hostname: housing
     # command: ["./wait-for-it/wait-for-it.sh", "postgres:5432", "-t", "300", "--", "npm", "run", "start"]
     command: ["./wait-for-it/wait-for-it.sh", "postgres:5432", "-t", "300", "--", "npm", "run", "dev"]
@@ -22,7 +24,7 @@ services:
     ports:
       - "23085:8081"
     env_file:
-      - variables.env
+      - docker/variables.env
     links:
       - postgres
 networks:

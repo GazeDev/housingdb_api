@@ -1,0 +1,22 @@
+version: '3'
+services:
+  deploy:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile-deploy
+    hostname: deploy
+    # command: ["./wait-for-it/wait-for-it.sh", "postgres:5432", "-t", "300", "--", "npm", "run", "start"]
+    # command: ["./wait-for-it/wait-for-it.sh", "postgres:5432", "-t", "300", "--", "npm", "run", "dev"]
+    # command: ["./wait-for-it/wait-for-it.sh", "postgres:5432", "-t", "300", "--", "npm", "run", "test"]
+    # command: git push https://heroku:$(echo $HEROKU_API_KEY)@git.heroku.com/gaze-housingdb.git master
+    command: tail -f /dev/null
+    volumes:
+      - ./:/usr/src/api
+      - /usr/src/api/node_modules
+    # ports:
+    #   - "23086:8081"
+    env_file:
+      - docker/deploy-variables.env
+networks:
+  default:
+    driver: bridge
