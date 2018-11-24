@@ -75,7 +75,13 @@ module.exports = (async() => {
   });
 
   // NOTE: This will wipe/forcibly restructure a database. ONLY USE FOR DEV.
-  await sequelize.sync({force: true});
+  try {
+    await sequelize.sync({force: true});
+  } catch (e) {
+    console.log('sync error');
+    console.log(e);
+  }
+
 
   // Build the routes of all our modules, injecting the models into each
   for (let mod of modules) {
@@ -109,10 +115,15 @@ module.exports = (async() => {
     grouping: 'tags'
   };
 
-  await server.register([Inert, Vision, {
-    'plugin': HapiSwagger,
-    'options': swaggerOptions
-  }]);
+  try {
+    await server.register([Inert, Vision, {
+      'plugin': HapiSwagger,
+      'options': swaggerOptions
+    }]);
+  } catch (err) {
+    console.log(err);
+  }
+
 
   try {
     server.start();
