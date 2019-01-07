@@ -8,7 +8,11 @@ const HapiSwagger = require('hapi-swagger');
 
 module.exports = (async() => {
   const server = new Hapi.Server({
-    port: process.env.PORT || 8081
+    port: process.env.PORT || 8081,
+    routes: {cors: {
+      additionalHeaders: ['access-control-allow-origin'],
+      origin: [process.env.CORS_ORIGIN],
+    }}
   });
 
   // standardize variables used for db connection
@@ -76,7 +80,7 @@ module.exports = (async() => {
 
   // NOTE: This will wipe/forcibly restructure a database. ONLY USE FOR DEV.
   try {
-    await sequelize.sync({force: true});
+    // await sequelize.sync({force: true});
   } catch (e) {
     console.log('sync error');
     console.log(e);
@@ -102,7 +106,7 @@ module.exports = (async() => {
     path: '/',
     handler: function (request, h) {
       return h
-        .response('Hello, world!');
+        .response({status: 'up'});
     }
   });
 

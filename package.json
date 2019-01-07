@@ -15,6 +15,8 @@
   "author": "Zac Littleberry",
   "license": "ISC",
   "dependencies": {
+    "boom": "^7.3.0",
+    "google-libphonenumber": "^3.1.15",
     "hapi": "^17.5.1",
     "hapi-swagger": "^9.1.1",
     "inert": "^5.1.0",
@@ -29,7 +31,7 @@
   "devDependencies": {
     "code": "^5.2.0",
     "gulp": "^3.9.1",
-    "gulp-lab": "^1.0.7",
+    "gulp-lab": "^1.0.8",
     "lab": "^15.5.0"
   }
 }
