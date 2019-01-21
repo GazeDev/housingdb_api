@@ -9,6 +9,8 @@ services:
       - docker/variables.env
     ports:
       - "15432:5432"
+    networks:
+      - housingdb
   api:
     build:
       context: .
@@ -27,6 +29,10 @@ services:
       - docker/variables.env
     links:
       - postgres
+    networks:
+      - housingdb
+    depends_on:
+      - postgres
   deploy:
     build:
       context: .
@@ -40,4 +46,6 @@ services:
       - docker/deploy-variables.env
 networks:
   default:
+    driver: bridge
+  housingdb:
     driver: bridge

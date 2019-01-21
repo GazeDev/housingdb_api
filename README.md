@@ -64,4 +64,18 @@ To start the server, run the Installation/Docker Commands, primarily
 
 `docker-compose up -d`
 
-The docs should now be available at http://localhost:23084
+The docs should now be available at http://localhost:23085/documentation
+
+## Features/Roadmap
+
+### What it does:
+- Create a property
+- Get an individual property
+- Get a list of properties
+- Create a landlord
+- Get and individual landlord
+- Get a list of landlords
+- Add a landlord to a property
+
+### Roadmap
+- auth and permissions

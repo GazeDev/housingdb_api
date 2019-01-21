@@ -36,20 +36,27 @@ module.exports = (async() => {
     db_type = process.env.DB_TYPE;
   }
 
-  const sequelize = new Sequelize(db_name, db_user, db_password, {
-    host: db_host,
-    dialect: db_type,
-    port: db_port,
-    pool: {
-      log: true,
-      max: 5,
-      min: 0,
-      acquire: 30000,
-      idle: 10000
-    },
-    // http://docs.sequelizejs.com/manual/tutorial/querying.html#operators
-    operatorsAliases: false
-  });
+  let sequelize;
+  try {
+    sequelize = new Sequelize(db_name, db_user, db_password, {
+      host: db_host,
+      dialect: db_type,
+      port: db_port,
+      pool: {
+        log: true,
+        max: 5,
+        min: 0,
+        acquire: 30000,
+        idle: 10000
+      },
+      // http://docs.sequelizejs.com/manual/tutorial/querying.html#operators
+      operatorsAliases: false
+    });
+  } catch (err) {
+    console.log('Sequelize init error:');
+    console.log(err);
+  }
+
 
   const modules = require('./lib/modules');
 
