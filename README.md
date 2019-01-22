@@ -20,20 +20,15 @@ Run this command:
 `docker-compose build`
 
 Then run the container:
-`docker-compose up -d`
+`docker-compose up api`
 
 Your app should be running. You can now view the logs to make sure and find the url:
 `docker-compose logs --follow`
 
 If you need terminal access inside your application (for example, to install npm dependencies):
 
-`docker-compose exec lab bash`
-(Note: exec requires that we choose a service, which is why we have to specify lab, which is defined in our docker/docker-compose.yml)
-
-Filling out variables.env:
-- To find the DB_HOST:
--- `docker network inspect bridge | grep Gateway`
-(This assumes you have a postgres db container running on your machine. Depending on your local development choices you may need to find your database host another way.)
+`docker-compose exec api bash`
+(Note: exec requires that we choose a service, which is why we have to specify api, which is defined in our docker/docker-compose.yml)
 
 To stop the container:
 `docker-compose stop`
@@ -62,7 +57,7 @@ The API docs are auto-generated with hapi-swagger when the server is running
 
 To start the server, run the Installation/Docker Commands, primarily
 
-`docker-compose up -d`
+`docker-compose up api`
 
 The docs should now be available at http://localhost:23085/documentation
 
