@@ -16,8 +16,9 @@ and [docker compose](https://docs.docker.com/compose/install/). You'll need to
 copy variables.env.example to variables.env and set the values and then run the
 commands below via command line to get started:
 
-Run this command:
-`docker-compose build`
+Run these command:
+`docker-compose build postgres`
+`docker-compose build api`
 
 Then run the container:
 `docker-compose up api`
