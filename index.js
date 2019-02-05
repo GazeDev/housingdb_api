@@ -87,7 +87,7 @@ module.exports = (async() => {
 
   // NOTE: This will wipe/forcibly restructure a database. ONLY USE FOR DEV.
   try {
-    // await sequelize.sync({force: true});
+    await sequelize.sync({force: true});
   } catch (e) {
     console.log('sync error');
     console.log(e);
