@@ -16,15 +16,23 @@ and [docker compose](https://docs.docker.com/compose/install/). You'll need to
 copy variables.env.example to variables.env and set the values and then run the
 commands below via command line to get started:
 
-Run these command:
-`docker-compose build postgres`
-`docker-compose build api`
+Copy the deploy variables example file:
+
+Copy the variables example file:
+`cp docker/variables.env.example docker/variables.env`
+(The file needs to exist even if you aren't deploying because docker will complain otherwise)
+
+And if needed modify it:
+`nano docker/variables.env`
+
+Run this command:
+`docker-compose build`
 
 Then run the container:
 `docker-compose up api`
 
-Your app should be running. You can now view the logs to make sure and find the url:
-`docker-compose logs --follow`
+You should then be able to access the api at the following url:
+`http://localhost:23085`
 
 If you need terminal access inside your application (for example, to install npm dependencies):
 
