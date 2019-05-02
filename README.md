@@ -28,6 +28,9 @@ And if needed modify it:
 Run this command:
 `docker-compose build`
 
+If you are not running the gaze_auth repo then you will need to add the network:
+`docker network create gazeauth_gazeauth`
+
 Then run the container:
 `docker-compose up api`
 
