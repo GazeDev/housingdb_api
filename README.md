@@ -73,6 +73,10 @@ To start the server, run the Installation/Docker Commands, primarily
 
 The docs should now be available at http://localhost:23085/documentation
 
+## Additional Documentation
+
+Additional documentation can be found in markdown format in the [docs directory](docs/index.md)
+
 ## Features/Roadmap
 
 ### What it does:
