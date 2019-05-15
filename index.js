@@ -12,7 +12,16 @@ const jwksRsa = require('jwks-rsa');
 
 module.exports = (async() => {
 
-  const envVars = ['CORS_ORIGIN', 'SELF_HOST', 'JWT_JWKS_URI', 'JWT_AUDIENCE', 'JWT_ISSUER', 'ADDRESS_API', 'ADDRESS_API_KEY'];
+  const envVars = [
+    'CORS_ORIGIN',
+    'SELF_HOST',
+    'JWT_AUDIENCE',
+    'JWT_ISSUER',
+    'JWT_NETWORK_URI',
+    'JWT_CLIENT',
+    'ADDRESS_API',
+    'ADDRESS_API_KEY'
+  ];
 
   for (let envVar of envVars) {
     if (!process.env[envVar]) {
@@ -141,7 +150,7 @@ module.exports = (async() => {
       cache: true,
       rateLimit: true,
       jwksRequestsPerMinute: 60,
-      jwksUri: process.env.JWT_JWKS_URI,
+      jwksUri: `${process.env.JWT_NETWORK_URI}/protocol/openid-connect/certs`,
     }),
     verifyOptions: {
       audience: process.env.JWT_AUDIENCE,
@@ -195,7 +204,22 @@ module.exports = (async() => {
       title: 'API Documentation',
       version: "1.0",
     },
-    grouping: 'tags'
+    grouping: 'tags',
+    securityDefinitions: {
+      'Bearer': {
+        'type': 'apiKey',
+        'name': 'Authorization',
+        'in': 'header'
+      },
+      'gaze_auth': {
+        'type':	'oauth2',
+        'authorizationUrl':	'http://localhost:8081/auth/realms/gaze-accounts/protocol/openid-connect/auth',
+        'tokenUrl': 'http://localhost:8081/auth/realms/gaze-accounts/protocol/openid-connect/token',
+        'flow':	'accessCode'
+      },
+    },
+    security: [{ 'Bearer': []}],
+    jsonEditor: true,
   };
 
   try {
