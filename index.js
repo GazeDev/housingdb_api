@@ -128,7 +128,7 @@ module.exports = (async() => {
         credentials: {
           scope: decoded.scope.split(' '),
           resourceAccess: decoded.resource_access,
-          userId: decoded.sub,
+          subjectId: decoded.sub,
           email: decoded.email,
           emailVerified: decoded.email_verified,
           name: decoded.name,
