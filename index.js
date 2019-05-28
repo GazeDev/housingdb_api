@@ -219,7 +219,7 @@ module.exports = (async() => {
       },
     },
     security: [{ 'Bearer': []}],
-    jsonEditor: true,
+    // jsonEditor: true,
   };
 
   try {
