@@ -213,8 +213,8 @@ module.exports = (async() => {
       },
       'gaze_auth': {
         'type':	'oauth2',
-        'authorizationUrl':	'http://localhost:8081/auth/realms/gaze-accounts/protocol/openid-connect/auth',
-        'tokenUrl': 'http://localhost:8081/auth/realms/gaze-accounts/protocol/openid-connect/token',
+        'authorizationUrl':	`${process.env.JWT_ISSUER}/protocol/openid-connect/auth`,
+        'tokenUrl': `${process.env.JWT_ISSUER}/protocol/openid-connect/token`,
         'flow':	'accessCode'
       },
     },
