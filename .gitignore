@@ -1,4 +1,4 @@
 
 node_modules
 docker/variables.env
-docker/deploy-variables.env
+docker/variables-deploy.env
