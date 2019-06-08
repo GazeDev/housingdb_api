@@ -1,0 +1,40 @@
+version: '3'
+services:
+  postgres:
+    image: postgres:10
+    restart: always
+    volumes:
+      - ./docker/postgres-data:/var/lib/postgresql/data
+    env_file:
+      - docker/variables.env
+    ports:
+      - "15432:5432"
+    networks:
+      - housingdb
+  api:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile-test
+    hostname: api
+    command: ["./wait-for-it/wait-for-it.sh", "postgres:5432", "-t", "300", "--", "npm", "run", "test"]
+    volumes:
+      - ./:/usr/src/api
+      - /usr/src/api/node_modules
+    ports:
+      - "23085:8081"
+    env_file:
+      - docker/variables-test.env
+    links:
+      - postgres
+    networks:
+      - housingdb
+      - gazeauth_gazeauth
+    depends_on:
+      - postgres
+networks:
+  default:
+    driver: bridge
+  housingdb:
+    driver: bridge
+  gazeauth_gazeauth:
+    external: true
