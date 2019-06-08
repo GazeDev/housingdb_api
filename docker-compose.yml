@@ -34,17 +34,6 @@ services:
       - gazeauth_gazeauth
     depends_on:
       - postgres
-  deploy:
-    build:
-      context: .
-      dockerfile: docker/Dockerfile-deploy
-    hostname: deploy
-    command: ./heroku-deploy.sh
-    volumes:
-      - ./:/usr/src/api
-      - /usr/src/api/node_modules
-    env_file:
-      - docker/deploy-variables.env
 networks:
   default:
     driver: bridge

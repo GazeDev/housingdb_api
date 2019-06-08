@@ -1,0 +1,13 @@
+version: '3'
+services:
+  deploy:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile-deploy
+    hostname: deploy
+    command: ./heroku-deploy.sh
+    volumes:
+      - ./:/usr/src/api
+      - /usr/src/api/node_modules
+    env_file:
+      - docker/variables-deploy.env
