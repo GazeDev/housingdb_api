@@ -22,6 +22,8 @@ NOTE: We are going to use a bash alias to make running docker-compose files a bi
 echo "alias docker-compose-local='docker-compose --file=docker-compose-local.yml'" >> ~/.bashrc
 echo "alias docker-compose-deploy='docker-compose --file=docker-compose-deploy.yml'" >> ~/.bashrc
 source ~/.bashrc
+echo "alias docker-compose-test='docker-compose --file=docker-compose-test.yml'" >> ~/.bashrc
+source ~/.bashrc
 ```
 ---
 

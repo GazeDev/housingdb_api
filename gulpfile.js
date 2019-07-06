@@ -6,6 +6,7 @@ const modules = require('./lib/modules.js');
 
 gulp.task('test', function () {
   let argArray = [
+    '--globals', 'core,__core-js_shared__',
     '--verbose',
     '--assert',
     '@hapi/code',
