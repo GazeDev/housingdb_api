@@ -72,7 +72,8 @@ module.exports = (async() => {
         idle: 10000
       },
       // http://docs.sequelizejs.com/manual/tutorial/querying.html#operators
-      operatorsAliases: false
+      operatorsAliases: false,
+      logging: false,
     });
   } catch (err) {
     console.log('Sequelize init error:');
@@ -116,7 +117,6 @@ module.exports = (async() => {
   }
 
   const validateUser = async (decoded, request) => {
-    console.log('validate user called');
     // This is a simple check that the `sub` claim
     // exists in the access token.
 
@@ -234,7 +234,6 @@ module.exports = (async() => {
 
   try {
     server.start();
-    console.log('Server running at:', server.info.uri);
   } catch(err) {
     console.log(err);
   }
