@@ -1,0 +1,5 @@
+image: node:10.15.3
+unit test:
+  script:
+  - npm install
+  - npm test
