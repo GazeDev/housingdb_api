@@ -19,7 +19,7 @@ variables:
   DB_NAME: db
   DB_USER: root
   DB_PASSWORD: changeme
-  CORS_ORIGIN: *
+  CORS_ORIGIN: "*"
   SELF_HOST: localhost:23085
   JWT_AUDIENCE: account
   JWT_ISSUER: https://accounts.gaze.dev/auth/realms/test-accounts
