@@ -16,7 +16,12 @@ gulp.task('test', function () {
     argArray.push(`lib/${mod}/${mod}.tests.js`);
   }
   return gulp.src('test', { allowEmpty: true })
-    .pipe(lab(argArray));
+    .pipe(lab({
+      args: argArray,
+      opts: {
+        emitLabError: true
+      }
+    }));
 });
 
 gulp.task('default', gulp.parallel('test'));
