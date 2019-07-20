@@ -1,11 +1,19 @@
-image: node:10.15.3
+services:
+  - postgres
+
+connect:
+  image: postgres:10
+  script:
+  # official way to provide password to psql: http://www.postgresql.org/docs/9.3/static/libpq-envars.html
+  - export PGPASSWORD=$POSTGRES_PASSWORD
+  - psql -h "postgres" -U "$POSTGRES_USER" -d "$POSTGRES_DB" -c "SELECT 'OK' AS status;"
+
+
 unit test:
+  image: node:10.15.3
   script:
   - npm install
   - npm test
-
-services:
-  - postgres
 
 variables:
   # Configure postgres service (https://hub.docker.com/_/postgres/)
