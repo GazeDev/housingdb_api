@@ -16,6 +16,17 @@ and [docker compose](https://docs.docker.com/compose/install/). You'll need to
 copy variables.env.example to variables.env and set the values and then run the
 commands below via command line to get started:
 
+---
+NOTE: We are going to use a bash alias to make running docker-compose files a bit less verbose. You can run the following to create `docker-compose-local` and `docker-compose-deploy` alias commands:
+```
+echo "alias docker-compose-local='docker-compose --file=docker-compose-local.yml'" >> ~/.bashrc
+echo "alias docker-compose-deploy='docker-compose --file=docker-compose-deploy.yml'" >> ~/.bashrc
+source ~/.bashrc
+echo "alias docker-compose-test='docker-compose --file=docker-compose-test.yml'" >> ~/.bashrc
+source ~/.bashrc
+```
+---
+
 Copy the deploy variables example file:
 
 Copy the variables example file:

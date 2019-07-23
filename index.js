@@ -72,7 +72,8 @@ module.exports = (async() => {
         idle: 10000
       },
       // http://docs.sequelizejs.com/manual/tutorial/querying.html#operators
-      operatorsAliases: false
+      operatorsAliases: false,
+      logging: false,
     });
   } catch (err) {
     console.log('Sequelize init error:');
@@ -116,7 +117,6 @@ module.exports = (async() => {
   }
 
   const validateUser = async (decoded, request) => {
-    console.log('validate user called');
     // This is a simple check that the `sub` claim
     // exists in the access token.
 
@@ -128,7 +128,7 @@ module.exports = (async() => {
         credentials: {
           scope: decoded.scope.split(' '),
           resourceAccess: decoded.resource_access,
-          userId: decoded.sub,
+          subjectId: decoded.sub,
           email: decoded.email,
           emailVerified: decoded.email_verified,
           name: decoded.name,
@@ -213,13 +213,13 @@ module.exports = (async() => {
       },
       'gaze_auth': {
         'type':	'oauth2',
-        'authorizationUrl':	'http://localhost:8081/auth/realms/gaze-accounts/protocol/openid-connect/auth',
-        'tokenUrl': 'http://localhost:8081/auth/realms/gaze-accounts/protocol/openid-connect/token',
+        'authorizationUrl':	`${process.env.JWT_ISSUER}/protocol/openid-connect/auth`,
+        'tokenUrl': `${process.env.JWT_ISSUER}/protocol/openid-connect/token`,
         'flow':	'accessCode'
       },
     },
     security: [{ 'Bearer': []}],
-    jsonEditor: true,
+    // jsonEditor: true,
   };
 
   try {
@@ -234,7 +234,6 @@ module.exports = (async() => {
 
   try {
     server.start();
-    console.log('Server running at:', server.info.uri);
   } catch(err) {
     console.log(err);
   }

@@ -14,19 +14,16 @@ services:
   api:
     build:
       context: .
-      dockerfile: docker/Dockerfile
+      dockerfile: docker/Dockerfile-test
     hostname: api
-    # command: ["./wait-for-it/wait-for-it.sh", "postgres:5432", "-t", "300", "--", "npm", "run", "start"]
-    command: ["./wait-for-it/wait-for-it.sh", "postgres:5432", "-t", "300", "--", "npm", "run", "dev"]
-    # command: ["./wait-for-it/wait-for-it.sh", "postgres:5432", "-t", "300", "--", "npm", "run", "test"]
-    # command: ["./wait-for-it/wait-for-it.sh", "postgres:5432", "-t", "300", "--", "npm", "run", "hold"]
+    command: ["./wait-for-it/wait-for-it.sh", "postgres:5432", "-t", "300", "--", "npm", "run", "test"]
     volumes:
       - ./:/usr/src/api
       - /usr/src/api/node_modules
     ports:
       - "23085:8081"
     env_file:
-      - docker/variables.env
+      - docker/variables-test.env
     links:
       - postgres
     networks:
