@@ -25,7 +25,7 @@ module.exports = (async() => {
 
   for (let envVar of envVars) {
     if (!process.env[envVar]) {
-      throw `Error: Make sure you have ${envVar} in your environment variables.`;
+      console.error(`Error: Make sure you have ${envVar} in your environment variables.`);
     }
   }
 

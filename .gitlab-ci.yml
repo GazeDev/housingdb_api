@@ -1,19 +1,4 @@
-services:
-  - postgres
-
-connect:
-  image: postgres:10
-  script:
-  # official way to provide password to psql: http://www.postgresql.org/docs/9.3/static/libpq-envars.html
-  - export PGPASSWORD=$POSTGRES_PASSWORD
-  - psql -h "postgres" -U "$POSTGRES_USER" -d "$POSTGRES_DB" -c "SELECT 'OK' AS status;"
-
-
-unit test:
-  image: node:10.15.3
-  script:
-  - npm install
-  - npm test
+image: node:10.15.3
 
 variables:
   # Configure postgres service (https://hub.docker.com/_/postgres/)
@@ -27,7 +12,7 @@ variables:
   DB_NAME: db
   DB_USER: root
   DB_PASSWORD: changeme
-  CORS_ORIGIN: "*"
+  CORS_ORIGIN: localhost
   SELF_HOST: localhost:23085
   JWT_AUDIENCE: account
   JWT_ISSUER: https://accounts.gaze.dev/auth/realms/test-accounts
@@ -37,3 +22,19 @@ variables:
   # ADDRESS_API_KEY: [GitLab CI/CD Variable]
   # TEST_USER: [GitLab CI/CD Variable]
   # TEST_PASSWORD: [GitLab CI/CD Variable]
+
+services:
+  - postgres
+
+connect:
+  image: postgres:10
+  script:
+  # official way to provide password to psql: http://www.postgresql.org/docs/9.3/static/libpq-envars.html
+  - export PGPASSWORD=$POSTGRES_PASSWORD
+  - psql -h "postgres" -U "$POSTGRES_USER" -d "$POSTGRES_DB" -c "SELECT 'OK' AS status;"
+
+
+unit test:
+  script:
+  - npm install
+  - npm run test
