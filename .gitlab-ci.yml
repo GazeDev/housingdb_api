@@ -26,7 +26,8 @@ variables:
 services:
   - postgres
 
-connect:
+database:
+  stage: test
   image: postgres:10
   script:
   # official way to provide password to psql: http://www.postgresql.org/docs/9.3/static/libpq-envars.html
@@ -34,7 +35,15 @@ connect:
   - psql -h "postgres" -U "$POSTGRES_USER" -d "$POSTGRES_DB" -c "SELECT 'OK' AS status;"
 
 
-unit test:
+api test:
+  stage: test
   script:
   - npm install
   - npm run test
+
+deploy master:
+  stage: deploy
+  script:
+  - echo "Deploy to hosting"
+  # only:
+  # - master
