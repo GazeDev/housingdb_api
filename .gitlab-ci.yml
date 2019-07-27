@@ -44,6 +44,7 @@ api test:
 deploy master:
   stage: deploy
   script:
+  - curl https://cli-assets.heroku.com/install.sh | sh
   - ./heroku-deploy.sh
   environment:
     name: production
