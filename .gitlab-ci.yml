@@ -44,7 +44,7 @@ api test:
 deploy master:
   stage: deploy
   script:
-  - echo "Deploy to hosting"
+  - ./heroku-deploy.sh
   environment:
     name: production
     url: gaze-housingdb.herokuapp.com
