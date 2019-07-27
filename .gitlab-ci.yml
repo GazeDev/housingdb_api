@@ -50,5 +50,5 @@ deploy master:
   environment:
     name: production
     url: gaze-housingdb.herokuapp.com
-  # only:
-  # - master
+  only:
+  - master
