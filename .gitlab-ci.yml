@@ -45,5 +45,8 @@ deploy master:
   stage: deploy
   script:
   - echo "Deploy to hosting"
+  environment:
+    name: production
+    url: gaze-housingdb.herokuapp.com
   # only:
   # - master
