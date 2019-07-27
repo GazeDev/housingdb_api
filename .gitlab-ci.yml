@@ -44,8 +44,9 @@ api test:
 deploy master:
   stage: deploy
   script:
-  - curl https://cli-assets.heroku.com/install.sh | sh
-  - ./heroku-deploy.sh
+  - git remote add heroku https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_REPO.git
+  - git push heroku master
+  - echo "Deployed to Production Server"
   environment:
     name: production
     url: gaze-housingdb.herokuapp.com
