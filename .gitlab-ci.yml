@@ -1,0 +1,54 @@
+image: node:10.15.3
+
+variables:
+  # Configure postgres service (https://hub.docker.com/_/postgres/)
+  POSTGRES_DB: db
+  POSTGRES_USER: root
+  POSTGRES_PASSWORD: changeme
+  # Configure API
+  NODE_ENV: docker
+  DB_HOST: postgres
+  DB_TYPE: postgres
+  DB_NAME: db
+  DB_USER: root
+  DB_PASSWORD: changeme
+  CORS_ORIGIN: localhost
+  SELF_HOST: localhost:23085
+  JWT_AUDIENCE: account
+  JWT_ISSUER: https://accounts.gaze.dev/auth/realms/test-accounts
+  JWT_NETWORK_URI: https://accounts.gaze.dev/auth/realms/test-accounts
+  JWT_CLIENT: housingdb
+  ADDRESS_API: https://maps.googleapis.com/maps/api/geocode/json
+  # ADDRESS_API_KEY: [GitLab CI/CD Variable]
+  # TEST_USER: [GitLab CI/CD Variable]
+  # TEST_PASSWORD: [GitLab CI/CD Variable]
+
+services:
+  - postgres
+
+database:
+  stage: test
+  image: postgres:10
+  script:
+  # official way to provide password to psql: http://www.postgresql.org/docs/9.3/static/libpq-envars.html
+  - export PGPASSWORD=$POSTGRES_PASSWORD
+  - psql -h "postgres" -U "$POSTGRES_USER" -d "$POSTGRES_DB" -c "SELECT 'OK' AS status;"
+
+
+api test:
+  stage: test
+  script:
+  - npm install
+  - npm run test
+
+deploy master:
+  stage: deploy
+  script:
+  - git remote add heroku https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_REPO.git
+  - git push heroku HEAD:master
+  - echo "Deployed to Production Server"
+  environment:
+    name: production
+    url: gaze-housingdb.herokuapp.com
+  only:
+  - master

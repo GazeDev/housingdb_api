@@ -25,7 +25,7 @@ module.exports = (async() => {
 
   for (let envVar of envVars) {
     if (!process.env[envVar]) {
-      throw `Error: Make sure you have ${envVar} in your environment variables.`;
+      console.error(`Error: Make sure you have ${envVar} in your environment variables.`);
     }
   }
 
@@ -71,8 +71,6 @@ module.exports = (async() => {
         acquire: 30000,
         idle: 10000
       },
-      // http://docs.sequelizejs.com/manual/tutorial/querying.html#operators
-      operatorsAliases: false,
       logging: false,
     });
   } catch (err) {
