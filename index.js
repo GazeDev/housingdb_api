@@ -33,6 +33,7 @@ module.exports = (async() => {
     port: process.env.PORT || 8081,
     routes: {cors: {
       additionalHeaders: ['access-control-allow-origin'],
+      exposedHeaders: ['Content-Location'],
       origin: [process.env.CORS_ORIGIN],
     }}
   });
