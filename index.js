@@ -20,7 +20,9 @@ module.exports = (async() => {
     'JWT_NETWORK_URI',
     'JWT_CLIENT',
     'ADDRESS_API',
-    'ADDRESS_API_KEY'
+    'ADDRESS_API_KEY',
+    'ADDRESS_LIMIT_COUNTY',
+    'ADDRESS_LIMIT_STATE',
   ];
 
   for (let envVar of envVars) {
