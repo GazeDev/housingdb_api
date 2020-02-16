@@ -109,12 +109,15 @@ module.exports = (async() => {
     }
   });
 
-  // NOTE: This will wipe/forcibly restructure a database. ONLY USE FOR DEV.
   try {
-    await sequelize.sync({force: true});
+    if (process.env['DB_DESTROY_DATABASE_RESTRUCTURE'] === 'DB_DESTROY_DATABASE_RESTRUCTURE') {
+      // NOTE: This will wipe/forcibly restructure a database. ONLY USE FOR DEV.
+      await sequelize.sync({force: true});
+    } else {
+      await sequelize.sync();
+    }
   } catch (e) {
-    console.log('sync error');
-    console.log(e);
+    console.log('Error during sync:', e);
   }
 
   const validateUser = async (decoded, request) => {
