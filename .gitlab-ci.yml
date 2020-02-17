@@ -45,10 +45,11 @@ deploy master:
   stage: deploy
   script:
   - git remote add heroku https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_REPO.git
+  - git checkout master
   - git push heroku HEAD:master
   - echo "Deployed to Production Server"
   environment:
     name: production
-    url: gaze-housingdb.herokuapp.com
+    url: [yourapp-api].herokuapp.com
   only:
   - master
