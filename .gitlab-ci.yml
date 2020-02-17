@@ -50,6 +50,6 @@ deploy master:
   - echo "Deployed to Production Server"
   environment:
     name: production
-    url: [yourapp-api].herokuapp.com
+    url: gaze-housingdb.herokuapp.com
   only:
   - master
