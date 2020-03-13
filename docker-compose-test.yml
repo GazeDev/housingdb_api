@@ -28,7 +28,7 @@ services:
       - postgres
     networks:
       - housingdb
-      - gazeauth_gazeauth
+      # - gazeauth_gazeauth
     depends_on:
       - postgres
 networks:
@@ -36,5 +36,5 @@ networks:
     driver: bridge
   housingdb:
     driver: bridge
-  gazeauth_gazeauth:
-    external: true
+  # gazeauth_gazeauth:
+  #   external: true
