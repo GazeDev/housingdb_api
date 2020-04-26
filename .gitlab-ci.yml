@@ -6,12 +6,8 @@ variables:
   POSTGRES_USER: root
   POSTGRES_PASSWORD: changeme
   # Configure API
-  NODE_ENV: docker
-  DB_HOST: postgres
-  DB_TYPE: postgres
-  DB_NAME: db
-  DB_USER: root
-  DB_PASSWORD: changeme
+  NODE_ENV: testing
+  DATABASE_URL: postgres://root:changeme@postgres:5432/db
   CORS_ORIGIN: localhost
   SELF_HOST: localhost:23085
   JWT_AUDIENCE: account

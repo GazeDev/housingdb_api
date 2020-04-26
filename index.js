@@ -40,33 +40,21 @@ module.exports = (async() => {
     }}
   });
 
-  // standardize variables used for db connection
+  // construct a Database Url if we weren't given one
   let db_name, db_user, db_password, db_host, db_port, db_type;
-
-  // db connection may be set as a DATABASE_URL string we have to parse
-  if (process.env.DATABASE_URL) {
-    let url = new URL(process.env.DATABASE_URL);
-    db_name = url.pathname.replace(/^\//, "");
-    db_user = url.username;
-    db_password = url.password;
-    db_host = url.hostname;
-    db_port = url.port;
-    db_type = url.protocol.replace(/\:$/, "")
-  } else {
-    db_name = process.env.DB_NAME;
+  if (!process.env.DATABASE_URL) {
+    db_type = process.env.DB_TYPE;
     db_user = process.env.DB_USER;
     db_password = process.env.DB_PASSWORD;
     db_host = process.env.DB_HOST;
-    db_port = '';
-    db_type = process.env.DB_TYPE;
+    db_port = process.env.DB_PORT;
+    db_name = process.env.DB_NAME;
+    process.env.DATABASE_URL = `${db_type}://${db_user}:${db_password}@${db_host}:${db_port}/${db_name}`;
   }
 
   let sequelize;
   try {
-    sequelize = new Sequelize(db_name, db_user, db_password, {
-      host: db_host,
-      dialect: db_type,
-      port: db_port,
+    sequelize = new Sequelize(process.env.DATABASE_URL, {
       pool: {
         log: true,
         max: 5,
