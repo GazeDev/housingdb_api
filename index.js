@@ -204,10 +204,10 @@ module.exports = (async() => {
         'in': 'header'
       },
       'gaze_auth': {
-        'type':	'oauth2',
-        'authorizationUrl':	`${process.env.JWT_ISSUER}/protocol/openid-connect/auth`,
+        'type': 'oauth2',
+        'authorizationUrl': `${process.env.JWT_ISSUER}/protocol/openid-connect/auth`,
         'tokenUrl': `${process.env.JWT_ISSUER}/protocol/openid-connect/token`,
-        'flow':	'accessCode'
+        'flow': 'accessCode'
       },
     },
     security: [{ 'Bearer': []}],
@@ -226,6 +226,7 @@ module.exports = (async() => {
 
   try {
     server.start();
+    console.log('server running at ' + process.env.SELF_HOST);
   } catch(err) {
     console.log(err);
   }
