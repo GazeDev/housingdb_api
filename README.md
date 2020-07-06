@@ -17,7 +17,7 @@ copy variables.env.example to variables.env and set the values and then run the
 commands below via command line to get started:
 
 ---
-NOTE: We are going to use a bash alias to make running docker-compose files a bit less verbose. You can run the following to create `docker-compose-local` and `docker-compose-deploy` alias commands:
+NOTE: We are going to use a bash alias to make running docker-compose files a bit less verbose. You can run the following to create `docker-compose-local`, `docker-compose-deploy` and `docker-compose-test` alias commands:
 ```
 echo "alias docker-compose-local='docker-compose --file=docker-compose-local.yml'" >> ~/.bashrc
 echo "alias docker-compose-deploy='docker-compose --file=docker-compose-deploy.yml'" >> ~/.bashrc
@@ -27,20 +27,14 @@ source ~/.bashrc
 ```
 ---
 
-Copy the deploy variables example file:
-
 Copy the variables example file:
 `cp docker/variables.env.example docker/variables.env`
-(The file needs to exist even if you aren't deploying because docker will complain otherwise)
 
-And if needed modify it:
+The file should be ready-to-go for local development, but if you needed to modify it you could run (or use any other editor of your choice):
 `nano docker/variables.env`
 
 Run this command:
 `docker-compose build`
-
-If you are not running the gaze_auth repo then you will need to add the network:
-`docker network create gazeauth_gazeauth`
 
 Then run the container:
 `docker-compose up api`
@@ -48,12 +42,14 @@ Then run the container:
 You should then be able to access the api at the following url:
 `http://localhost:23085`
 
+NOTE: If you ran `docker-compose up api` then your api process is attached to your terminal, meaning it is printing the logs there, and if you close the terminal, or ctrl+c in the terminal, the api will close. You'll need to run `docker-compose up api` the next time you want the api to spin up again. If you want to run the api in "detached" mode, you can do so with `docker-compose up -d api`. My recommendation for starting out is to leave it attached, and if you need your terminal to do something else, open a new terminal window/tab.
+
 If you need terminal access inside your application (for example, to install npm dependencies):
 
 `docker-compose exec api bash`
 (Note: exec requires that we choose a service, which is why we have to specify api, which is defined in our docker/docker-compose.yml)
 
-To stop the container:
+To stop the container (needed if your container was run "detached" and you can't just ctrl+c the process):
 `docker-compose stop`
 
 To remove the container's image:
