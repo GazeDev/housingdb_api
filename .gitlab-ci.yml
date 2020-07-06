@@ -37,15 +37,15 @@ api test:
   - npm install
   - npm run test
 
-deploy master:
+deploy main:
   stage: deploy
   script:
   - git remote add heroku https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_REPO.git
-  - git checkout master
-  - git push heroku HEAD:master
+  - git checkout main
+  - git push heroku HEAD:main
   - echo "Deployed to Production Server"
   environment:
     name: production
     url: gaze-housingdb.herokuapp.com
   only:
-  - master
+  - main
