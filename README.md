@@ -17,7 +17,7 @@ copy variables.env.example to variables.env and set the values and then run the
 commands below via command line to get started:
 
 ---
-NOTE: We are going to use a bash alias to make running docker-compose files a bit less verbose. You can run the following to create `docker-compose-local`, `docker-compose-deploy` and `docker-compose-test` alias commands:
+NOTE: We are going to use a bash alias to make running docker-compose files a bit less verbose. You can run the following to create `docker-compose-local`, `docker-compose-deploy`, and `docker-compose-test` alias commands:
 ```
 echo "alias docker-compose-local='docker-compose --file=docker-compose-local.yml'" >> ~/.bashrc
 echo "alias docker-compose-deploy='docker-compose --file=docker-compose-deploy.yml'" >> ~/.bashrc
@@ -33,6 +33,11 @@ Copy the variables example file:
 The file should be ready-to-go for local development, but if you needed to modify it you could run (or use any other editor of your choice):
 `nano docker/variables.env`
 
+Note: If this is your first time running the api/db you'll need to restructure the database so it matches the ORM code. THIS WILL WIPE/EMPTY THE DATABASE, so don't do that in any environment you have data you need to keep around. You can restructure the db by un-commenting (removing the `#`) from this line in `docker/variables.env`: `# DB_DESTROY_DATABASE_RESTRUCTURE=DB_DESTROY_DATABASE_RESTRUCTURE`
+
+This will continually re-structure the database any time any code is changed in development mode. This can be useful if you are building db models, or annoying if you are trying to create data. Re-comment that line, stop your docker container, and re-up it to cease database restructuring on code change.
+
+
 Run this command:
 `docker-compose build`
 
@@ -42,18 +47,17 @@ Then run the container:
 You should then be able to access the api at the following url:
 `http://localhost:23085`
 
-NOTE: If you ran `docker-compose up api` then your api process is attached to your terminal, meaning it is printing the logs there, and if you close the terminal, or ctrl+c in the terminal, the api will close. You'll need to run `docker-compose up api` the next time you want the api to spin up again. If you want to run the api in "detached" mode, you can do so with `docker-compose up -d api`. My recommendation for starting out is to leave it attached, and if you need your terminal to do something else, open a new terminal window/tab.
+To instead run a container detached, you can run the following:
+`docker-compose up -d api`
 
-If you need terminal access inside your application (for example, to install npm dependencies):
+To view a detached container's logs as they are generated:
+`docker-compose logs --follow`
 
-`docker-compose exec api bash`
-(Note: exec requires that we choose a service, which is why we have to specify api, which is defined in our docker/docker-compose.yml)
-
-To stop the container (needed if your container was run "detached" and you can't just ctrl+c the process):
+To stop a detached container:
 `docker-compose stop`
 
-To remove the container's image:
-`docker-compose rm`
+To open a bash shell in a container:
+`docker-compose exec bash api`
 
 ## Testing
 
@@ -94,6 +98,10 @@ Additional documentation can be found in markdown format in the [docs directory]
 - Get and individual landlord
 - Get a list of landlords
 - Add a landlord to a property
+- Create an account
+- Create content attached to account
+- Create Reviews
+- View Reviews and External Reviews
 
 ### Roadmap
-- auth and permissions
+- Housing Wanted and Housing Available
