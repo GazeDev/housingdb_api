@@ -16,8 +16,8 @@ services:
       context: .
       dockerfile: docker/Dockerfile
     hostname: api
-    command: bash -c "./wait-for-it/wait-for-it.sh postgres:5432 -t 300 && npx sequelize db:migrate && npm run dev"
-    # command: bash -c "./wait-for-it/wait-for-it.sh postgres:5432 -t 300 && npm run dev"
+    # command: bash -c "./wait-for-it/wait-for-it.sh postgres:5432 -t 300 && npx sequelize db:migrate && npm run dev"
+    command: bash -c "./wait-for-it/wait-for-it.sh postgres:5432 -t 300 && npm run dev"
     volumes:
       - ./:/usr/src/api
       - /usr/src/api/node_modules
