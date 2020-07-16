@@ -4,3 +4,4 @@ docker/variables.env
 docker/variables-deploy.env
 docker/variables-test.env
 docker/postgres-data
+.vs
