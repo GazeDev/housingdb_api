@@ -3,5 +3,6 @@ node_modules
 docker/variables.env
 docker/variables-deploy.env
 docker/variables-test.env
+.vscode
 docker/postgres-data
 .DS_Store
