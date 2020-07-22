@@ -5,4 +5,5 @@ docker/variables-deploy.env
 docker/variables-test.env
 docker/postgres-data
 .vs
+.vscode
 .DS_Store
