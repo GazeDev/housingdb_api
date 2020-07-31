@@ -78,11 +78,13 @@ module.exports = (async() => {
 
   // define the models of all of our modules
   for (let mod of modules) {
+    console.log(mod);
     let modelsFile;
     try {
       modelsFile = require(`./lib/${mod}/${mod}.models.js`);
       if (modelsFile.db) {
         let model = modelsFile.db(sequelize, Sequelize);
+        console.log(model.name);
         models[model.name] = model;
       }
     } catch(err) {
