@@ -15,7 +15,6 @@
   "author": "Zac Littleberry",
   "license": "ISC",
   "dependencies": {
-    "@hapi/boom": "^9.1.0",
     "boom": "^7.3.0",
     "google-libphonenumber": "^3.2.2",
     "hapi": "^17.8.5",
