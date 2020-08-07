@@ -83,7 +83,6 @@ module.exports = (async() => {
       modelsFile = require(`./lib/${mod}/${mod}.models.js`);
       if (modelsFile.db) {
         let model = modelsFile.db(sequelize, Sequelize);
-        //console.log(model.name);
         models[model.name] = model;
       }
     } catch(err) {
