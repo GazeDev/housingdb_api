@@ -61,18 +61,7 @@ To open a bash shell in a container:
 
 ## Testing
 
-In order to run the test suites, you can either
-
-1) Use terminal access inside your application to run the tests:
-`docker-compose exec lab bash`
-`$ npm run test`
-
-2) In `docker/docker-compose.yml` change the line
-`command: npm run dev` to `command: npm run test`
-Then you can restart the container with
-`docker-compose up -d`
-and view the logs from the test with
-`docker-compose logs --follow`
+In order to run the tests, ensure your variables-test.env is filled out, the bash alias 'docker-compose-test' is set, and then from your terminal run the command, `docker-compose-test up`
 
 ## Auto Generated API Docs
 
