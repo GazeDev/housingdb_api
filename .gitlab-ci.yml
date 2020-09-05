@@ -1,4 +1,4 @@
-image: node:10.15.3
+image: node:12.18.3
 
 variables:
   # Configure postgres service (https://hub.docker.com/_/postgres/)
