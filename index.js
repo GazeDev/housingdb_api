@@ -1,9 +1,9 @@
 'use strict';
 
-const Hapi = require('hapi');
+const Hapi = require('@hapi/hapi');
 const Sequelize = require('sequelize');
-const Inert = require('inert');
-const Vision = require('vision');
+const Inert = require('@hapi/inert');
+const Vision = require('@hapi/vision');
 const HapiSwagger = require('hapi-swagger');
 
 const jwt = require('hapi-auth-jwt2');
@@ -203,12 +203,12 @@ module.exports = (async() => {
         'name': 'Authorization',
         'in': 'header'
       },
-      'gaze_auth': {
-        'type': 'oauth2',
-        'authorizationUrl': `${process.env.JWT_ISSUER}/protocol/openid-connect/auth`,
-        'tokenUrl': `${process.env.JWT_ISSUER}/protocol/openid-connect/token`,
-        'flow': 'accessCode'
-      },
+      // NOTE: type: openIdConnect is not yet supported in the ui: https://github.com/swagger-api/swagger-ui/issues/3517
+      //   Furthermore, at last check (2020-05-25) hapi-swagger-ui is using swagger ui v2, not v3
+      // 'gaze_auth': {
+      //   'type': 'openIdConnect',
+      //   'openIdConnectUrl': `${process.env.JWT_ISSUER}/.well-known/openid-configuration`,
+      // },
     },
     security: [{ 'Bearer': []}],
     // jsonEditor: true,
